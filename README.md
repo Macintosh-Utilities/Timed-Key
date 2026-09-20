@@ -1,45 +1,174 @@
-# Timed Key
+<div align="center">
 
-Timed Key is a native macOS utility that sends a selected keyboard key to a selected application at a scheduled date and exact time.
+<picture>
+  <img src="Brand/timed-key-readme-banner.svg" width="100%" alt="Timed Key — the right key, the right app, exactly on time">
+</picture>
 
-Version 2.0 is a complete redesign and reliability overhaul. It replaces the original single-timer experience with a focused **When → Key → App** workflow, multiple schedules, repeat rules, permission diagnostics, stable LaunchAgent management, persistent run results, and recoverable failures.
+# ⌨️ Timed Key
 
-See [`PATCH_NOTES.md`](PATCH_NOTES.md) for the complete version 2.0 release notes.
+**A focused, native macOS automation utility built for dependable keyboard scheduling.**
 
-## Version 2.0 at a glance
+<p>
+  <img alt="macOS 14 or later" src="https://img.shields.io/badge/macOS-14%2B-F5F7F4?style=for-the-badge&logo=apple&logoColor=080A0B&labelColor=080A0B">
+  <img alt="Apple Silicon" src="https://img.shields.io/badge/architecture-arm64-CCFF00?style=for-the-badge&logo=apple&logoColor=CCFF00&labelColor=080A0B">
+</p>
 
-- Native SwiftUI interface designed specifically for macOS.
-- Graphical calendar plus visual hour, minute, and second controls.
-- Optional manual `HH:MM:SS` entry for precise typing.
-- One-time, daily, weekdays, weekends, and weekly schedules.
-- Multiple independently managed schedules.
-- Exact-second delivery on top of launchd's minute-level scheduling.
-- Exact target-app matching by bundle identifier and application path.
-- Built-in permission, installation, scheduler, and last-run diagnostics.
-- Persistent success, failure, deferred, and missed-run records.
-- Automatic scheduler repair and orphan cleanup.
-- Recoverable one-time failures with a visible **Retry** action.
-- Signed Release build with Hardened Runtime enabled.
+<p>
+  <img alt="SwiftUI" src="https://img.shields.io/badge/SwiftUI-native-F05138?style=flat-square&logo=swift&logoColor=white">
+  <img alt="Hardened Runtime" src="https://img.shields.io/badge/Hardened%20Runtime-enabled-2EA44F?style=flat-square">
+  <img alt="Signing" src="https://img.shields.io/badge/signing-Apple%20Development-F5A623?style=flat-square">
+  <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-3B82F6?style=flat-square">
+</p>
 
-## Requirements
+[What it does](#-what-it-does) · [Install](#-install-timed-key) · [First launch](#-first-launch--gatekeeper) · [Use it](#-the-focused-scheduling-flow) · [Reliability](#-reliability-by-design) · [Build](#-building-from-source) · [Patch notes](PATCH_NOTES.md)
 
-- macOS 14.0 or later.
-- A signed copy of Timed Key in `/Applications` or `~/Applications`.
-- Accessibility and event-posting permission granted by the signed-in user.
-- An active macOS Aqua user session at delivery time.
+</div>
 
-Timed Key does not require a network connection, online account, or cloud service.
+---
 
-## Installation
+> [!NOTE]
+> **Timed Key combines a focused experience with a reliability-first scheduling engine.** The **When → Key → App** flow supports multiple schedules, repeat rules, exact-second delivery, permission diagnostics, verified LaunchAgents, persistent outcomes, and recoverable failures.
 
-1. Build or obtain `Timed Key.app`.
-2. Place the app at `/Applications/Timed Key.app` for normal use.
-3. Open that installed copy rather than repeatedly launching copies from Xcode DerivedData.
-4. In the **Reliability** panel, click **Grant access**.
-5. Enable Timed Key when macOS opens **System Settings → Privacy & Security**. Depending on the macOS version, the relevant page may be named **Accessibility** or **Device Control and Data Access**.
-6. Quit and reopen Timed Key if the permission row does not immediately change to **PASS**.
+<table>
+  <tr>
+    <td width="25%" align="center">
+      <h3>🗓️ Visual</h3>
+      <p>Pick a date and exact time from native controls—or type it directly.</p>
+    </td>
+    <td width="25%" align="center">
+      <h3>⚡ Precise</h3>
+      <p>Complete the final wait in-app for exact-second delivery.</p>
+    </td>
+    <td width="25%" align="center">
+      <h3>🧭 Focused</h3>
+      <p>Move naturally through the clear When → Key → App flow.</p>
+    </td>
+    <td width="25%" align="center">
+      <h3>💚 Visible</h3>
+      <p>See permissions, scheduler health, and the last result at a glance.</p>
+    </td>
+  </tr>
+</table>
 
-The Reliability panel should show:
+<p align="center"><sub>OBSIDIAN INTERFACE &nbsp;◆&nbsp; ELECTRIC-LIME ACTIONS &nbsp;◆&nbsp; NATIVE SWIFTUI</sub></p>
+
+## ✨ What it does
+
+Timed Key sends a selected keyboard key to a selected macOS application at a scheduled date and exact time—even when the target app is not already open.
+
+| | Choose | Available options |
+|:--:|---|---|
+| 🗓️ | **When** | Native calendar, visual hour/minute/second controls, or manual `HH:MM:SS` entry |
+| 🔁 | **Repeat** | One Time, Daily, Weekdays, Weekends, or Weekly |
+| ⌨️ | **Key** | Common controls, arrows, A–Z, 0–9, and F1–F5 |
+| 🎯 | **App** | A running application or an exact manually entered target |
+
+### Highlights
+
+- **Focused native interface** built around a clear When → Key → App sequence.
+- **Exact-second scheduling** layered on top of launchd's minute-resolution calendar triggers.
+- **Multiple independent schedules** with pause, resume, retry, and delete controls.
+- **Verified app targeting** by display name, bundle identifier, and exact application path.
+- **Visible reliability diagnostics** for permissions, installation, scheduler health, and the last run.
+- **Persistent outcomes** for success, failure, deferred delivery, missed runs, and measured timing drift.
+- **Automatic repair** for stale scheduler configuration and orphaned LaunchAgents.
+- **Recoverable one-time failures** retained in the queue with a visible **Retry** action.
+- **Apple Silicon-only output** with the Xcode target explicitly restricted to `arm64`.
+
+---
+
+## 📋 Requirements
+
+| Requirement | Value |
+|---|---|
+| **Mac** | Apple Silicon (`arm64`) |
+| **macOS** | 14.0 Sonoma or later |
+| **Install location** | `/Applications` or `~/Applications` |
+| **Permissions** | Accessibility and CoreGraphics PostEvent access |
+| **Session** | An active signed-in Aqua user session at delivery time |
+| **Network** | Not required for normal operation |
+
+> [!IMPORTANT]
+> The downloadable development build is signed with **Apple Development**, not **Developer ID Application**, and is not notarized for public distribution. Gatekeeper may therefore block the first launch until the user explicitly approves the app. Read the first-launch instructions below before opening it.
+
+---
+
+## 📦 Install Timed Key
+
+1. Download and extract `Timed Key.app` from the official Macintosh Utilities GitHub release.
+2. Drag **Timed Key.app** into `/Applications`.
+3. Open the copy inside **Applications**—do not repeatedly launch a copy from Downloads, a mounted archive, or Xcode DerivedData.
+4. Complete the Gatekeeper approval described below if macOS blocks the first launch.
+5. Open Timed Key's **Reliability** panel and select **Grant access**.
+6. Approve the requested macOS privacy permission, then quit and reopen Timed Key.
+
+Using a stable Applications-directory copy matters: each schedule stores an exact application path so launchd consistently starts the same signed build.
+
+---
+
+## 🛡 First launch & Gatekeeper
+
+Because this release uses an **Apple Development** signature instead of a notarized Developer ID distribution signature, a Mac that downloaded it from the internet may show one of these first-launch alerts:
+
+- **“Apple cannot check ‘Timed Key’ for malicious software.”**
+- **“The developer of ‘Timed Key’ cannot be verified.”**
+- A similar message saying Timed Key cannot be opened because Apple cannot verify the developer.
+
+The buttons can vary by macOS version. The initial dialog may offer **Done**, **Cancel**, or **Move to Trash** without showing an **Open** button.
+
+### Approve the expected verification warning
+
+> [!WARNING]
+> Only continue if you intentionally downloaded Timed Key from the official Macintosh Utilities repository and the archive has not been replaced or modified. A Gatekeeper override tells macOS to trust this specific app despite the missing Developer ID notarization.
+
+1. Double-click **Timed Key.app** once so macOS records the blocked launch.
+2. Dismiss the warning with **Done** or **Cancel**. Do not choose **Move to Trash** if this is the expected official download.
+3. Open **Apple menu → System Settings → Privacy & Security**.
+4. Scroll down to the **Security** section.
+5. Find the message explaining that Timed Key was blocked.
+6. Click **Open Anyway**. Apple makes this control available for approximately one hour after the blocked launch attempt.
+7. Authenticate with Touch ID or your Mac login password if requested.
+8. When the warning returns, click **Open** to confirm.
+
+macOS saves the app as an exception, so subsequent launches of that exact copy should work normally. Replacing, moving, rebuilding, or differently signing the app can cause macOS or its privacy system to ask again.
+
+Apple's current instructions are available in [Safely open apps on your Mac](https://support.apple.com/102445).
+
+> [!NOTE]
+> **Open Anyway only overrides Gatekeeper's first-launch policy.** It cannot repair an invalid or expired signature, and it cannot make a development provisioning profile valid for an unregistered Mac. If the exported app contains a profile limited to registered testing Macs, the recipient's Mac must be registered and included when the build is signed. See Apple's [registered-device distribution guide](https://developer.apple.com/documentation/xcode/distributing-your-app-to-registered-devices).
+
+### Alerts you should **not** bypass
+
+Stop and obtain a fresh copy if macOS says that Timed Key:
+
+- **will damage your computer**;
+- **contains malware**; or
+- **is damaged** and cannot be opened.
+
+Those messages are different from the expected developer-verification warning and can indicate corruption, modification, a revoked authorization, or a genuinely unsafe file. Do not disable Gatekeeper globally, and do not use Terminal commands that remove quarantine metadata to force the app open.
+
+<details>
+<summary><strong>Why does this warning appear?</strong></summary>
+
+For software distributed outside the Mac App Store, Gatekeeper expects a **Developer ID Application** signature and normally expects notarization. **Apple Development** signing is intended for development and controlled testing. It authenticates a development build but is not the public-distribution identity Gatekeeper expects.
+
+This warning does not mean macOS detected malware; it means Apple cannot apply the normal Developer ID and notarization assurances. Users should still verify that the download came from the expected source before overriding the warning.
+
+</details>
+
+---
+
+## 🔐 Accessibility permission
+
+After Gatekeeper allows the app to launch, macOS must separately authorize Timed Key to send keyboard events to other applications.
+
+1. Open Timed Key.
+2. In **Reliability**, click **Grant access**.
+3. When macOS opens **System Settings → Privacy & Security**, enable Timed Key under **Accessibility** or the corresponding device-control section shown by your macOS version.
+4. Authenticate if macOS requests it.
+5. Quit and reopen Timed Key if the status does not immediately refresh.
+
+The healthy state is:
 
 ```text
 Permissions      PASS
@@ -47,66 +176,80 @@ Stable install   PASS
 Scheduler        PASS
 ```
 
-macOS intentionally requires the user to approve input-control permission. Timed Key cannot silently grant this permission to itself.
+> [!IMPORTANT]
+> Timed Key cannot silently grant protected input-control permission to itself. This is an intentional macOS security boundary, not an app failure.
 
-## Using Timed Key
+---
 
-### 1. Choose when
+## 🎛 The focused scheduling flow
 
-Select a date from the graphical calendar, then choose the hour, minute, and second.
+### ① Choose when
 
-If you prefer typing, expand **Type HH:MM:SS instead** and enter a 24-hour time such as:
+Select a date from the graphical calendar, then choose the hour, minute, and second. For direct entry, expand **Type HH:MM:SS instead** and enter a 24-hour value such as `09:30:05`.
 
-```text
-09:30:05
-```
+The visual controls and typed value remain synchronized.
 
-The typed value and visual time controls remain synchronized.
+### ② Choose a repeat rule
 
-### 2. Choose a repeat rule
+| Rule | Behavior |
+|---|---|
+| **One Time** | Runs once on the selected calendar date |
+| **Daily** | Runs every day after the selected start date |
+| **Weekdays** | Runs Monday through Friday |
+| **Weekends** | Runs Saturday and Sunday |
+| **Weekly** | Runs on the selected weekday |
 
-Available repeat modes are:
+### ③ Choose a key
 
-- **One Time** — runs once on the selected date.
-- **Daily** — runs every day after the selected start date.
-- **Weekdays** — runs Monday through Friday.
-- **Weekends** — runs Saturday and Sunday.
-- **Weekly** — runs on the selected weekday.
+Timed Key supports:
 
-### 3. Choose a key
+- Return, Tab, Space, Delete, and Escape
+- Left, Right, Up, and Down Arrow
+- Letters A–Z
+- Digits 0–9
+- Function keys F1–F5
 
-Timed Key currently supports:
+### ④ Choose an application
 
-- Return, Tab, Space, Delete, and Escape.
-- Left, Right, Up, and Down Arrow.
-- Letters A–Z.
-- Digits 0–9.
-- Function keys F1–F5.
+Choose a running application from the menu. Timed Key records its display name, bundle identifier, and exact bundle path when available. Select **Other…** to enter an application name manually.
 
-### 4. Choose an application
-
-Choose a running application from the menu. Timed Key records the app's display name, bundle identifier, and exact bundle path when available.
-
-Use **Other…** to enter an exact application name manually.
-
-### 5. Add the schedule
+### ⑤ Add the schedule
 
 Click **Add Schedule**. Timed Key persists the schedule before registering its LaunchAgent, verifies that launchd retained it, and displays the next scheduled press at the top of the window.
 
 Each queue item can be paused, resumed, retried when applicable, or deleted.
 
-## Reliability panel
+---
 
-The Reliability panel reports four independent states:
+## 💚 Reliability by design
 
-- **Permissions** — Accessibility and CoreGraphics PostEvent authorization.
-- **Stable install** — whether scheduling can use a stable Applications-directory copy.
-- **Scheduler** — whether every enabled schedule has a matching loaded LaunchAgent.
-- **Last run** — the most recently persisted success, failure, deferred, or missed result.
+The Reliability panel reports four independent signals:
 
-If the app is moved, replaced, or an agent becomes inconsistent, use **Repair**. Timed Key also reconciles saved schedules automatically when the app starts.
+| Signal | What it verifies |
+|---|---|
+| **Permissions** | Accessibility and CoreGraphics PostEvent authorization |
+| **Stable install** | Scheduling is using a stable Applications-directory copy |
+| **Scheduler** | Every enabled schedule has a matching, loaded LaunchAgent |
+| **Last run** | The most recently persisted success, failure, deferred, or missed result |
 
-## How scheduling works
+If the app is moved, replaced, or an agent becomes inconsistent, select **Repair**. Timed Key also reconciles saved schedules automatically at launch.
+
+### Late, locked, and failed runs
+
+- Recurring runs have a bounded 15-minute late window; older launches are recorded as missed.
+- One-time runs may recover later on their selected day but never execute on another calendar day.
+- If the screen is locked, Timed Key waits up to five minutes for an unlock.
+- Transient application launch and activation failures are retried.
+- Failed one-time schedules remain visible, disabled, and retryable.
+- Successful one-time schedules are removed from saved state and unloaded from launchd.
+- Failed and missed helpers exit with a nonzero process status.
+
+No macOS utility can guarantee delivery through shutdown, power loss, hardware failure, a terminated login session, revoked permission, or a target application that refuses keyboard input. Timed Key explicitly records controllable failures instead of silently claiming success.
+
+---
+
+<details>
+<summary><strong>⚙️ How exact scheduling works</strong></summary>
 
 Every enabled schedule receives a unique per-user LaunchAgent:
 
@@ -114,70 +257,57 @@ Every enabled schedule receives a unique per-user LaunchAgent:
 ~/Library/LaunchAgents/com.timedkey.trigger.<schedule-uuid>.plist
 ```
 
-The agent starts a fresh background Timed Key instance through `/usr/bin/open -W -n` and passes the exact installed app path and strictly validated schedule arguments.
+The agent starts a fresh background Timed Key instance using `/usr/bin/open -W -n` and passes the exact installed app path plus strictly validated schedule arguments.
 
 Because `StartCalendarInterval` has minute-level precision, the scheduled helper performs the final exact-second wait itself. At delivery time it:
 
-1. Validates the schedule UUID, key code, hour, minute, second, start date, repeat mode, app identity, and optional bundle path.
+1. Validates the schedule UUID, key code, time, start date, repeat mode, and app identity.
 2. Reconstructs and verifies the expected occurrence.
-3. Waits until the requested second using repeated short absolute-time checks.
+3. Waits until the requested second using short absolute-time checks.
 4. Rejects launches that are too early, stale, or on the wrong recurrence day.
 5. Checks Accessibility and PostEvent permission.
-6. Detects whether the Mac is locked.
-7. Waits up to five minutes for an unlock when delivery is temporarily blocked by the lock screen.
-8. Resolves and launches the target application.
-9. Waits for that application to finish launching.
-10. Repeatedly activates it and verifies that it is genuinely frontmost.
-11. Posts a key-down and key-up pair.
-12. Keeps the signed helper alive briefly so WindowServer and TCC can finish event attribution.
-13. Persists the result and measured timing drift.
-14. Cleans up a completed one-time schedule only after verified success.
+6. Detects whether the Mac is locked and waits for an unlock when appropriate.
+7. Resolves and launches the target app.
+8. Repeatedly activates it and verifies that it is genuinely frontmost.
+9. Posts a key-down and key-up pair.
+10. Persists the outcome and measured timing drift.
+11. Cleans up a completed one-time schedule only after verified success.
 
-The app never reports a successful delivery merely because a timer fired or a process launched.
+The app never reports success merely because a timer fired or a process launched.
 
-## Late, locked, and failed runs
+</details>
 
-- A recurring run can be accepted within a bounded 15-minute late window. Older recurring launches are recorded as missed instead of sending an unexpectedly late key.
-- A one-time run can recover later on its selected day, but it will not execute on a different calendar day.
-- If the screen is locked, Timed Key waits for an unlock for up to five minutes.
-- Transient launch and activation failures are retried.
-- A failed one-time schedule is disabled and retained in the queue with its reason and a **Retry** action.
-- A successful one-time schedule is removed from saved state and unloaded from launchd.
-- Failed and missed helpers return a nonzero process status.
+<details>
+<summary><strong>🧾 Persistence and diagnostics</strong></summary>
 
-No macOS utility can guarantee delivery during power loss, shutdown, a terminated login session, revoked permission, hardware failure, or an application that refuses keyboard input. Timed Key handles the controllable failure paths explicitly and records an outcome instead of silently claiming success.
-
-## Persistence and diagnostics
-
-Schedules and the most recent run record are stored in the app's macOS preferences domain. Writes are protected by a cross-process file lock so the foreground app and scheduled background helper cannot overwrite one another.
-
-Version 2 uses:
+Schedules and the latest run record live in the app's macOS preferences domain. A cross-process file lock protects writes from the foreground app and scheduled helper.
 
 ```text
 timedKey.multipleSchedules.v2
 timedKey.lastRun.v1
 ```
 
-Compatible version 1 schedule data is migrated when possible. The old single LaunchAgent is removed during reconciliation.
-
-Scheduled-run diagnostics are appended directly by the signed helper to:
+Compatible version 1 schedules are migrated when possible. Scheduled-run diagnostics are written to:
 
 ```text
 ~/Library/Logs/Timed Key/scheduled-fire.log
 ```
 
-The log is forced to owner-only `0600` permissions and contains entries such as:
+The log uses owner-only `0600` permissions and records target time, release time, measured drift, and the final result.
 
-```text
-[Timed Key] target=2026-09-20T03:02:33.000Z released=2026-09-20T03:02:33.003Z drift=+0.003s
-[Timed Key] 2026-09-20T03:02:34.894Z Escape was submitted to Calculator.
-```
+</details>
 
-## Building from source
+---
 
-Open `Timed Key.xcodeproj` in the full Xcode application, select a valid development team if needed, and build the **Timed Key** scheme.
+## 🛠 Building from source
 
-Command-line Release build:
+1. Clone the repository.
+2. Open `Timed Key.xcodeproj` in the full Xcode application.
+3. Select your Apple Development team under **Signing & Capabilities**.
+4. Keep **App Sandbox** disabled; Timed Key must manage the user's LaunchAgents and synthesize input after explicit approval.
+5. Build the **Timed Key** scheme with `⌘B`.
+
+### Command-line Release build
 
 ```sh
 xcodebuild \
@@ -189,7 +319,7 @@ xcodebuild \
   clean build
 ```
 
-If the full Xcode installation is not the active developer directory, set `DEVELOPER_DIR` explicitly. For this checkout's external Xcode installation:
+If the full Xcode installation is not the active developer directory, set `DEVELOPER_DIR` explicitly:
 
 ```sh
 DEVELOPER_DIR='/Volumes/Crucial X9/Xcode.app/Contents/Developer' \
@@ -202,68 +332,75 @@ DEVELOPER_DIR='/Volumes/Crucial X9/Xcode.app/Contents/Developer' \
   clean build
 ```
 
-The Release product is generated at:
+The product is generated at:
 
 ```text
 build/DerivedData/Build/Products/Release/Timed Key.app
 ```
 
-For reliable scheduling, copy that signed product to `/Applications/Timed Key.app` and consistently use the installed copy.
+### Verify the build
 
-## Built-in verification
-
-Run the deterministic recurrence and trigger-parser suite without opening the main interface:
+Run the built-in deterministic recurrence and parser suite:
 
 ```sh
 'build/DerivedData/Build/Products/Release/Timed Key.app/Contents/MacOS/Timed Key' --self-test
 ```
 
-The suite verifies weekday and weekend selection, weekly recurrence, one-time expiration, and strict scheduled-trigger parsing.
-
-Before shipping a build, also verify the signature:
+Verify the code signature:
 
 ```sh
 codesign --verify --deep --strict --verbose=2 \
   'build/DerivedData/Build/Products/Release/Timed Key.app'
 ```
 
-Build success alone is not treated as proof of scheduled delivery. A release should also be tested with a real one-time schedule while confirming:
+Verify that the executable is Apple Silicon-only:
 
-- the top-center delivery banner appeared;
-- the target application became frontmost;
-- the key was submitted;
-- the Reliability panel recorded **SUCCESS**;
-- timing drift was written to the log;
-- the one-time schedule disappeared from the queue;
-- the corresponding LaunchAgent was unloaded and removed.
-
-## Xcode project configuration
-
-Version 2.0 updates `Timed Key.xcodeproj/project.pbxproj` as part of the release. The effective Release configuration is:
-
-```text
-Bundle identifier:               Mac-Utilities.Timed-Key
-Marketing version:               2.0
-Build number:                    3
-Minimum macOS version:           14.0
-Code-sign identity:              Apple Development
-Code-sign style:                 Automatic
-Development team:                883SQQ4WN6
-Hardened Runtime:                Enabled
-App Sandbox:                     Disabled
-Release base-entitlement inject: Disabled
+```sh
+lipo -archs \
+  'build/DerivedData/Build/Products/Release/Timed Key.app/Contents/MacOS/Timed Key'
 ```
 
-App Sandbox is intentionally disabled. Timed Key must manage the user's LaunchAgents and, after explicit approval, synthesize keyboard input.
+Expected result:
 
-The project explicitly disables unneeded access to Apple Events, the microphone, camera, contacts, calendars, location, and the photo library. Hardened Runtime exceptions for JIT, unsigned executable memory, DYLD environment variables, debugging, executable-page protection, and library validation are also explicitly disabled.
+```text
+arm64
+```
 
-## Source layout
+Build success is not treated as proof of scheduled delivery. Before shipping, create a real one-time schedule and confirm the banner, foreground application, key submission, persisted success, timing log, queue cleanup, and LaunchAgent cleanup.
 
-- `ContentView.swift` — focused scheduling UI, queue, diagnostics, app picker, permission actions, and transactional schedule changes.
-- `KeyCodes.swift` — supported key names and macOS virtual key codes.
-- `KeyEventSender.swift` — permission checks, direct diagnostic logging, target resolution, activation verification, and key delivery.
-- `ScheduleModels.swift` — schedule and run models, recurrence calculation, migration, persistence, and cross-process locking.
-- `SchedulerService.swift` — stable installation, LaunchAgent generation, verification, repair, reconciliation, and cleanup.
-- `Theme.swift` — obsidian/lime design tokens and reusable card styling.
-- `TimedKeyApp.swift` — foreground and headless launch modes, exact timing, recovery, run recording, cleanup, and self-tests.
+---
+
+## 🔩 Xcode configuration
+
+| Setting | Effective value |
+|---|---|
+| Bundle identifier | `Mac-Utilities.Timed-Key` |
+| Minimum macOS version | `14.0` |
+| Architectures | `arm64` only |
+| Code-sign identity | Apple Development |
+| Code-sign style | Automatic |
+| Hardened Runtime | Enabled |
+| App Sandbox | Disabled |
+| Release base-entitlement injection | Disabled |
+
+The project explicitly disables unused Apple Events, microphone, camera, contacts, calendars, location, and photo-library access. Hardened Runtime exceptions for JIT, unsigned executable memory, DYLD environment variables, debugging, executable-page protection, and library validation are also disabled.
+
+---
+
+## 📚 Release documentation
+
+- Read the complete [release patch notes](PATCH_NOTES.md).
+- Read the prepared [commit notes](COMMIT_NOTES.md).
+- Review the [MIT license](LICENSE).
+
+---
+
+<div align="center">
+
+### Built by Macintosh Utilities
+
+**Precise tools for the Mac you already know.**
+
+Made with `SwiftUI` · powered by `launchd` · finished with ⌨️ + ☕️
+
+</div>
