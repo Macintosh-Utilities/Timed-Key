@@ -64,3 +64,6 @@ fastlane/test_output
 # macOS / Xcode extras (not in the official template, but worth excluding)
 .DS_Store
 DerivedData/
+
+# Superdesign generated working files
+.superdesign/tmp/

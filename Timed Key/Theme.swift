@@ -1,12 +1,49 @@
 import SwiftUI
 
 enum Theme {
-    static let background = Color(red: 0x1C/255, green: 0x1C/255, blue: 0x1E/255)
-    static let panel = Color(red: 0xF2/255, green: 0xF2/255, blue: 0xF2/255)
-    static let textPrimary = Color(red: 0xF5/255, green: 0xF5/255, blue: 0xF7/255)
-    static let textSecondary = Color(red: 0x8E/255, green: 0x8E/255, blue: 0x93/255)
-    static let panelText = Color(red: 0x1C/255, green: 0x1C/255, blue: 0x1E/255)
-    static let panelTextSecondary = Color(red: 0x6E/255, green: 0x6E/255, blue: 0x73/255)
-    static let divider = Color(red: 0xDE/255, green: 0xDE/255, blue: 0xDE/255)
-    static let buttonBlue = Color(red: 0x0A/255, green: 0x84/255, blue: 0xFF/255)
+    static let window = Color(red: 8 / 255, green: 10 / 255, blue: 11 / 255)
+    static let surface = Color.white.opacity(0.055)
+    static let surfaceRaised = Color.white.opacity(0.085)
+    static let surfaceHover = Color.white.opacity(0.11)
+    static let border = Color.white.opacity(0.11)
+    static let borderStrong = Color.white.opacity(0.18)
+
+    static let textPrimary = Color(red: 245 / 255, green: 247 / 255, blue: 244 / 255)
+    static let textSecondary = Color(red: 245 / 255, green: 247 / 255, blue: 244 / 255).opacity(0.64)
+    static let textMuted = Color(red: 245 / 255, green: 247 / 255, blue: 244 / 255).opacity(0.40)
+
+    static let accent = Color(red: 204 / 255, green: 1, blue: 0)
+    static let accentPressed = Color(red: 183 / 255, green: 230 / 255, blue: 0)
+    static let accentInk = Color(red: 17 / 255, green: 20 / 255, blue: 0)
+    static let success = Color(red: 120 / 255, green: 224 / 255, blue: 143 / 255)
+    static let warning = Color(red: 1, green: 209 / 255, blue: 102 / 255)
+    static let danger = Color(red: 1, green: 107 / 255, blue: 107 / 255)
+    static let info = Color(red: 120 / 255, green: 169 / 255, blue: 1)
+}
+
+struct GlassCardModifier: ViewModifier {
+    var radius: CGFloat = 20
+    var raised = false
+
+    func body(content: Content) -> some View {
+        content
+            .background(raised ? Theme.surfaceRaised : Theme.surface)
+            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: radius, style: .continuous)
+                    .stroke(raised ? Theme.borderStrong : Theme.border, lineWidth: 1)
+            }
+            .shadow(
+                color: .black.opacity(raised ? 0.30 : 0.18),
+                radius: raised ? 18 : 10,
+                x: 0,
+                y: raised ? 9 : 5
+            )
+    }
+}
+
+extension View {
+    func glassCard(radius: CGFloat = 20, raised: Bool = false) -> some View {
+        modifier(GlassCardModifier(radius: radius, raised: raised))
+    }
 }
