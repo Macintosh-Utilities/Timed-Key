@@ -1,10 +1,10 @@
 <div align="center">
 
 <picture>
-  <img src="Brand/timed-key-readme-banner.svg" width="100%" alt="Timed Key — the right key, the right app, exactly on time">
+  <img src="./Timed Key/Assets.xcassets/ReadMeBanner.imageset/timed-key-readme-banner.svg" width="100%" alt="Timed Key — the right key, the right app, exactly on time">
 </picture>
 
-# ⌨️ Timed Key
+---
 
 **A focused, native macOS automation utility built for dependable keyboard scheduling.**
 
@@ -50,18 +50,18 @@
   </tr>
 </table>
 
-<p align="center"><sub>OBSIDIAN INTERFACE &nbsp;◆&nbsp; ELECTRIC-LIME ACTIONS &nbsp;◆&nbsp; NATIVE SWIFTUI</sub></p>
+<p align="center"><sub>OBSIDIAN INTERFACE  ◆  ELECTRIC-LIME ACTIONS  ◆  NATIVE SWIFTUI</sub></p>
 
 ## ✨ What it does
 
 Timed Key sends a selected keyboard key to a selected macOS application at a scheduled date and exact time—even when the target app is not already open.
 
-| | Choose | Available options |
-|:--:|---|---|
-| 🗓️ | **When** | Native calendar, visual hour/minute/second controls, or manual `HH:MM:SS` entry |
-| 🔁 | **Repeat** | One Time, Daily, Weekdays, Weekends, or Weekly |
-| ⌨️ | **Key** | Common controls, arrows, A–Z, 0–9, and F1–F5 |
-| 🎯 | **App** | A running application or an exact manually entered target |
+|     | Choose     | Available options                                                               |
+|:---:| ---------- | ------------------------------------------------------------------------------- |
+| 🗓️ | **When**   | Native calendar, visual hour/minute/second controls, or manual `HH:MM:SS` entry |
+| 🔁  | **Repeat** | One Time, Daily, Weekdays, Weekends, or Weekly                                  |
+| ⌨️  | **Key**    | Common controls, arrows, A–Z, 0–9, and F1–F5                                    |
+| 🎯  | **App**    | A running application or an exact manually entered target                       |
 
 ### Highlights
 
@@ -79,14 +79,14 @@ Timed Key sends a selected keyboard key to a selected macOS application at a sch
 
 ## 📋 Requirements
 
-| Requirement | Value |
-|---|---|
-| **Mac** | Apple Silicon (`arm64`) |
-| **macOS** | 14.0 Sonoma or later |
-| **Install location** | `/Applications` or `~/Applications` |
-| **Permissions** | Accessibility and CoreGraphics PostEvent access |
-| **Session** | An active signed-in Aqua user session at delivery time |
-| **Network** | Not required for normal operation |
+| Requirement          | Value                                                  |
+| -------------------- | ------------------------------------------------------ |
+| **Mac**              | Apple Silicon (`arm64`)                                |
+| **macOS**            | 14.0 Sonoma or later                                   |
+| **Install location** | `/Applications` or `~/Applications`                    |
+| **Permissions**      | Accessibility and CoreGraphics PostEvent access        |
+| **Session**          | An active signed-in Aqua user session at delivery time |
+| **Network**          | Not required for normal operation                      |
 
 > [!IMPORTANT]
 > The downloadable development build is signed with **Apple Development**, not **Developer ID Application**, and is not notarized for public distribution. Gatekeeper may therefore block the first launch until the user explicitly approves the app. Read the first-launch instructions below before opening it.
@@ -95,7 +95,7 @@ Timed Key sends a selected keyboard key to a selected macOS application at a sch
 
 ## 📦 Install Timed Key
 
-1. Download and extract `Timed Key.app` from the official Macintosh Utilities GitHub release.
+1. Download and extract `Timed Key.app` from the official Mac Utilities GitHub release.
 2. Drag **Timed Key.app** into `/Applications`.
 3. Open the copy inside **Applications**—do not repeatedly launch a copy from Downloads, a mounted archive, or Xcode DerivedData.
 4. Complete the Gatekeeper approval described below if macOS blocks the first launch.
@@ -119,7 +119,7 @@ The buttons can vary by macOS version. The initial dialog may offer **Done**, **
 ### Approve the expected verification warning
 
 > [!WARNING]
-> Only continue if you intentionally downloaded Timed Key from the official Macintosh Utilities repository and the archive has not been replaced or modified. A Gatekeeper override tells macOS to trust this specific app despite the missing Developer ID notarization.
+> Only continue if you intentionally downloaded Timed Key from the official Mac Utilities repository and the archive has not been replaced or modified. A Gatekeeper override tells macOS to trust this specific app despite the missing Developer ID notarization.
 
 1. Double-click **Timed Key.app** once so macOS records the blocked launch.
 2. Dismiss the warning with **Done** or **Cancel**. Do not choose **Move to Trash** if this is the expected official download.
@@ -191,13 +191,13 @@ The visual controls and typed value remain synchronized.
 
 ### ② Choose a repeat rule
 
-| Rule | Behavior |
-|---|---|
-| **One Time** | Runs once on the selected calendar date |
-| **Daily** | Runs every day after the selected start date |
-| **Weekdays** | Runs Monday through Friday |
-| **Weekends** | Runs Saturday and Sunday |
-| **Weekly** | Runs on the selected weekday |
+| Rule         | Behavior                                     |
+| ------------ | -------------------------------------------- |
+| **One Time** | Runs once on the selected calendar date      |
+| **Daily**    | Runs every day after the selected start date |
+| **Weekdays** | Runs Monday through Friday                   |
+| **Weekends** | Runs Saturday and Sunday                     |
+| **Weekly**   | Runs on the selected weekday                 |
 
 ### ③ Choose a key
 
@@ -225,12 +225,12 @@ Each queue item can be paused, resumed, retried when applicable, or deleted.
 
 The Reliability panel reports four independent signals:
 
-| Signal | What it verifies |
-|---|---|
-| **Permissions** | Accessibility and CoreGraphics PostEvent authorization |
-| **Stable install** | Scheduling is using a stable Applications-directory copy |
-| **Scheduler** | Every enabled schedule has a matching, loaded LaunchAgent |
-| **Last run** | The most recently persisted success, failure, deferred, or missed result |
+| Signal             | What it verifies                                                         |
+| ------------------ | ------------------------------------------------------------------------ |
+| **Permissions**    | Accessibility and CoreGraphics PostEvent authorization                   |
+| **Stable install** | Scheduling is using a stable Applications-directory copy                 |
+| **Scheduler**      | Every enabled schedule has a matching, loaded LaunchAgent                |
+| **Last run**       | The most recently persisted success, failure, deferred, or missed result |
 
 If the app is moved, replaced, or an agent becomes inconsistent, select **Repair**. Timed Key also reconciles saved schedules automatically at launch.
 
@@ -372,16 +372,16 @@ Build success is not treated as proof of scheduled delivery. Before shipping, cr
 
 ## 🔩 Xcode configuration
 
-| Setting | Effective value |
-|---|---|
-| Bundle identifier | `Mac-Utilities.Timed-Key` |
-| Minimum macOS version | `14.0` |
-| Architectures | `arm64` only |
-| Code-sign identity | Apple Development |
-| Code-sign style | Automatic |
-| Hardened Runtime | Enabled |
-| App Sandbox | Disabled |
-| Release base-entitlement injection | Disabled |
+| Setting                            | Effective value           |
+| ---------------------------------- | ------------------------- |
+| Bundle identifier                  | `Mac-Utilities.Timed-Key` |
+| Minimum macOS version              | `14.0`                    |
+| Architectures                      | `arm64` only              |
+| Code-sign identity                 | Apple Development         |
+| Code-sign style                    | Automatic                 |
+| Hardened Runtime                   | Enabled                   |
+| App Sandbox                        | Disabled                  |
+| Release base-entitlement injection | Disabled                  |
 
 The project explicitly disables unused Apple Events, microphone, camera, contacts, calendars, location, and photo-library access. Hardened Runtime exceptions for JIT, unsigned executable memory, DYLD environment variables, debugging, executable-page protection, and library validation are also disabled.
 
@@ -397,7 +397,7 @@ The project explicitly disables unused Apple Events, microphone, camera, contact
 
 <div align="center">
 
-### Built by Macintosh Utilities
+### Built by Mac Utilities
 
 **Precise tools for the Mac you already know.**
 
